@@ -1,0 +1,87 @@
+﻿@model IEnumerable<ProyectoFDI.v1.Models.Deportistum>
+@using Microsoft.AspNetCore.Identity
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>ADMINITRACIÓN DE DEPORTISTAS</h1>
+
+@if (User.IsInRole("Administrador") || User.IsInRole("Entrenador")){
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ApellidosDep)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombresDep)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CedulaDep)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoriaDep)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProvinciaDep)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClubDep)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GeneroDep)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdModNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApellidosDep)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombresDep)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CedulaDep)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoriaDep)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProvinciaDep)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClubDep)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GeneroDep)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdMod)
+            </td>
+@*            <td>
+                @Html.DisplayFor(modelItem => item.IdModNavigation.DescripcionMod)
+            </td>*@
+                @if (User.IsInRole("Administrador") || User.IsInRole("Entrenador")){
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.IdDep">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.IdDep">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.IdDep">Delete</a>
+                    </td>
+                }
+        </tr>
+}
+    </tbody>
+</table>
